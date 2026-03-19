@@ -11,7 +11,7 @@ def make_request(amount_of_requests):
 
 @timed
 @cli_args
-def main(amount_of_requests: int = 1_000, clients: int = 1, **kwargs) -> None:
+def main(amount_of_requests: int = 1000, clients: int = 1, host: str = "127.0.0.1", port: int = 50001, **kwargs:dict) -> None:
     threads = [Process(target=make_request, args=(amount_of_requests, )) for _ in range(clients)]
 
     for thread in threads:
