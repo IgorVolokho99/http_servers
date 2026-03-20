@@ -1,0 +1,22 @@
+import time
+import http.client
+
+from http_client_python.common import cli_args, timed
+
+def make_request(conn) -> None:
+    
+    conn.request("GET", "/")
+    response = conn.getresponse()
+    response.read()
+
+@cli_args
+@timed
+def main(amount_of_requests: int = 1000, clients: int = 1, host: str = "127.0.0.1", port: int = 50001, **kwargs:dict) -> None:
+    conn = http.client.HTTPConnection(host, port=port, timeout=10)
+    for _ in range(amount_of_requests):
+        make_request(conn)
+    conn.close()
+
+
+if __name__ == "__main__":
+    main()
